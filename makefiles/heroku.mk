@@ -1,12 +1,7 @@
-include makefiles/gitignore.mk
-include makefiles/heroku.mk
-include makefiles/aws.mk
-include makefiles/ytt.mk
-include makefiles/help.mk
-
 ################################################################################
 # 変数
 ################################################################################
+DOCKER_HEROKU_IMAGE := heroku/heroku:20.build
 
 ################################################################################
 # マクロ
@@ -15,6 +10,6 @@ include makefiles/help.mk
 ################################################################################
 # タスク
 ################################################################################
-.PHONY: deploy-docs
-deploy-docs: ## ドキュメントをデプロイする
-	git subtree push --prefix docs/html/ origin gh-pages
+.PHONY: bash
+bash: ## heroku command
+	docker run --rm -it $(DOCKER_HEROKU_IMAGE) bash
